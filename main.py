@@ -5,14 +5,12 @@ import numpy as np
 print("Input example image name:")
 example_name = input()
 
-print("Input data directory name:")
-data_dir = input()
 
 dom_colors = dict()
 
-for name in listdir(data_dir):
+for name in listdir("data"):
     # read img
-    img = cv2.imread(data_dir + "/" + name)
+    img = cv2.imread("data/" + name)
     # resize img
     img = cv2.resize(img, (128, 128), interpolation=cv2.INTER_AREA)
     # change color model to HSL
