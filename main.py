@@ -1,6 +1,9 @@
+import os
 from os import listdir
 import cv2
 import numpy as np
+#new
+import shutil
 
 print("Input example image name:")
 example_name = input()
@@ -25,8 +28,16 @@ for name in listdir("data"):
     counts = np.bincount(hues)
     # get most frequently hue
     dom_colors[name] = np.argmax(counts)
-
+# newstart
+if os.path.isdir("result"):
+    for i in os.listdir("result"):
+        os.remove("result/" + i)
+else:
+    os.mkdir("result")
+# newend
 for name in dom_colors:
     # find images with dominant color close to example image dominant color on value 18 (value find in many tests)
     if name != example_name and abs(dom_colors[example_name] - dom_colors[name]) < 18:
         print(name)
+        # new
+        shutil.copy("data/" + name, "result/" + name)
